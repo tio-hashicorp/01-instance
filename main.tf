@@ -4,7 +4,7 @@ provider "aws" {
 }
 
 resource "aws_instance"   "demo-vm" {
-  instance_type         = var.vm_size
+  instance_type         = var.vm_type
   availability_zone     = "us-east-2a"
   ami                   = "ami-0c55b159cbfafe1f0"
   subnet_id             = aws_subnet.demo-subnet.id
@@ -47,6 +47,6 @@ variable "cidrs" {
     default = "172.16.0.0/16"
 }
 
-variable "vm_size" {
+variable "vm_type" {
     default = "t2.micro"
 }
