@@ -1,32 +1,29 @@
+
 provider "aws" {
   region = "us-east-2"
 }
 
-resource "aws_instance"   "app" {
-  instance_type     = "t2.micro"
-  availability_zone = "us-east-2a"
-  ami               = "ami-0c55b159cbfafe1f0"
- subnet_id          = aws_subnet.mysubnet.id
+resource "aws_instance"   "demo-vm" {
+  instance_type         = var.vm_size
+  availability_zone     = "us-east-2a"
+  ami                   = "ami-0c55b159cbfafe1f0"
+  subnet_id             = aws_subnet.demo-subnet.id
 }
 
-variable "cidrs" {
-  default = ["172.31.0.0/16", "172.16.0.0/16"]
-}
-
-resource "aws_vpc" "hashicat" {
-  count = 2
-  cidr_block           = var.cidrs[count.index]
+resource "aws_vpc" "demo-vpc" {
+  cidr_block           = var.cidrs
   enable_dns_hostnames = true
 
   tags = {
-    name = "dsta-vpc.${count.index}"
-    environment = "Production.${count.index}"
+    name        = "demo-vpc"
+    Billable    = "true"
+    Department  = "Sales"
   }
 }
 
-resource "aws_subnet" "mysubnet" {
-  vpc_id = aws_vpc.hashicat[1].id
-  cidr_block = "172.16.10.0/24"
+resource "aws_subnet" "demo-subnet" {
+  vpc_id            = aws_vpc.demo-vpc.id
+  cidr_block        = "172.16.10.0/24"
   availability_zone = "us-east-2a"
 
   tags = {
@@ -35,3 +32,21 @@ resource "aws_subnet" "mysubnet" {
 }
 
 
+######
+# output
+#####
+output "demo-vm-ip" {
+    value = aws_instance.demo-vm.public_dns
+}
+
+######################
+# all the variables
+######################
+
+variable "cidrs" {
+    default = "172.16.0.0/16"
+}
+
+variable "vm_size" {
+    default = "t2.micro"
+}
