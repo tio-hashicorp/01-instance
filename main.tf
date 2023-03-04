@@ -32,13 +32,16 @@ resource "aws_subnet" "demo-subnet" {
 }
 
 
-######
+#####################
 # output
-#####
+#####################
 output "demo-vm-ip" {
     value = aws_instance.demo-vm.private_ip
 }
 
+output "demo-vm-public-ip" {
+    value = aws_instance.demo-vm.public_ip  
+}  
 ######################
 # all the variables
 ######################
