@@ -10,9 +10,9 @@ resource "aws_instance"   "demo-vm" {
   subnet_id             = aws_subnet.demo-subnet.id
   
   tags = {
-    name        = var.vm_name
+    Name        = var.vm_name
     Billable    = "true"
-    Department  = "Sales"
+    Department  = var.dept_name
   }
 }
 
@@ -21,9 +21,9 @@ resource "aws_vpc" "demo-vpc" {
   enable_dns_hostnames = true
 
   tags = {
-    name        = "demo-vpc"
+    Name        = "demo-vpc"
     Billable    = "true"
-    Department  = "Sales"
+    Department  = var.dept_name
   }
 }
 
@@ -62,4 +62,8 @@ variable "vm_type" {
 
 variable "vm_name" {
     default = "default-vm"
+}
+
+variable "dept_name" {
+    default = "Sales"
 }
