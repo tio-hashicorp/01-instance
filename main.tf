@@ -8,6 +8,12 @@ resource "aws_instance"   "demo-vm" {
   availability_zone     = "us-east-2a"
   ami                   = "ami-0c55b159cbfafe1f0"
   subnet_id             = aws_subnet.demo-subnet.id
+  
+  tags = {
+    name        = var.vm_name
+    Billable    = "true"
+    Department  = "Sales"
+  }
 }
 
 resource "aws_vpc" "demo-vpc" {
@@ -52,4 +58,8 @@ variable "cidrs" {
 
 variable "vm_type" {
     default = "t2.micro"
+}
+
+variable "vm_name" {
+    default = "default-vm"
 }
