@@ -1,6 +1,13 @@
+terraform {
+  required_providers {
+    aws = {
+      source = "hashicorp/aws"
+      version = "~> 4.49.0"
+    }
+  }
+}
 
 provider "aws" {
-  alias = "US"
   shared_config_files = [var.tfc_aws_dynamic_credentials.default.shared_config_file]
   region = var.aws_region
 }
