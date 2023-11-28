@@ -7,7 +7,7 @@ terraform {
 }
 
 provider "aws" {
-  shared_config_files = [var.tfc_aws_dynamic_credentials.default.shared_config_file]
+  #shared_config_files = [var.tfc_aws_dynamic_credentials.default.shared_config_file]
   region = var.aws_region
 }
 variable "aws_region" {
