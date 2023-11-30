@@ -23,7 +23,7 @@ variable "tfc_aws_dynamic_credentials" {
     }) 
   })
 }
-*/
+
 
 variable "tfc_aws_dynamic_credentials" {
   description = "Object containing AWS dynamic credentials configuration"
@@ -36,6 +36,7 @@ variable "tfc_aws_dynamic_credentials" {
     }))
   })
 }
+*/
 
 resource "aws_instance"   "demo-vm" {
   instance_type         = var.vm_type
