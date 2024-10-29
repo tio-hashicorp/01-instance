@@ -94,7 +94,8 @@ variable "cidrs" {
 }
 
 variable "vm_type" {
-    default = "t2.micro"
+#    default = "t2.micro"
+    default = "t2.xlarge"
 }
 
 variable "vm_name" {
